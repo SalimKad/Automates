@@ -1,0 +1,22 @@
+# alphabet
+a
+b
+c
+# etats
+S1
+S2
+S3
+S4
+S5
+# etat initial
+S1
+# etats finaux
+S3
+S5
+# transitions
+S1 a S1
+S1 b S2
+S2 b S2
+S2 a S3
+S3 c S4
+S4 a S5
