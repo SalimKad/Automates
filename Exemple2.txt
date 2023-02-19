@@ -11,7 +11,7 @@ S5
 # etat initial
 S1
 # etats finaux
-S3
+S2
 S5
 # transitions
 S1 a S1
