@@ -5,9 +5,9 @@ public class Main {
         //On test appartient
         ArrayList<String> alphabet = new ArrayList<>();
         String etatInitial;
-        ArrayList<String> etatsFinaux = new ArrayList<String>();
-        ArrayList<String> etats = new ArrayList<String>();
-        ArrayList<Transition> transitions = new ArrayList<Transition>();
+        ArrayList<String> etatsFinaux = new ArrayList<>();
+        ArrayList<String> etats = new ArrayList<>();
+        ArrayList<Transition> transitions = new ArrayList<>();
 
         alphabet.add("a");
         alphabet.add("b");
@@ -36,12 +36,12 @@ public class Main {
         boolean r2 = a1.appartient(mot2);
         System.out.println(mot2 + " appartient à A1 ? " + r2);
         //On test Automate
-        Automate a2 = new Automate("Exemple.txt");
+        Automate a2 = new Automate("Exemple2.txt");
         //System.out.println("Automate 2 : " + a2);
         boolean r3 = a2.appartient(mot);
         System.out.println(mot + " appartient à A2 ? " +r3);
         boolean r4 = a2.appartient(mot2);
-        System.out.println(mot + " appartient à A2 ? " + r4);
+        System.out.println(mot2 + " appartient à A2 ? " + r4);
 
 
 
@@ -53,5 +53,22 @@ public class Main {
         }
         System.out.println(alphabet);
         */
+        System.out.println("Exo 2 :\n");
+        Automate a3 = new Automate("Exo2.txt");
+        System.out.println("Automate 3 : " + a3);
+        String mot3 = "21Ss";
+        boolean r5 = a3.appartient(mot3);
+        System.out.println(mot3 + " appartient à A3 ? " + r5);
+        String mot4 = "5Svs";
+        boolean r6 = a3.appartient(mot4);
+        System.out.println(mot4 + " appartient à A3 ? " + r6);
+        String mot5 = "L22L1Ll";
+        boolean r7 = a3.appartient(mot5);
+        System.out.println(mot5 + " appartient à A3 ? " + r7);
+        String mot6 = "2Ss";
+        boolean r8 = a3.appartient(mot6);
+        System.out.println(mot6 + " appartient à A3 ? " + r8);
+
+
     }
 }
