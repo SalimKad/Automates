@@ -1,0 +1,83 @@
+digraph G{
+
+rankdir="LR";
+node [shape="circle"];
+
+//Q10CTS : 10 cts
+//Q20CTS : 20 cts
+//Q30CTS : 30 cts
+//Q40CTS : 40 cts
+//Q50CTS : 50 cts
+//Q60CTS : 60 cts
+//Q70CTS : 70 cts
+
+//QS10 : on livre S et rend 10 cts
+//QS20 : on livre S et rend 20 cts...
+
+QI [shape = doublecircle]
+QF [shape = doublecircle]
+
+//I.Cas 50 cts dès le début
+QI -> Q50CTS [label ="5"];
+QI -> QI [label ="S,L"];
+Q50CTS -> QS20 [label ="S"];
+QS20 -> QS10 [label ="d"];
+Q30CTS -> Q50CTS [label ="2"];
+QS20 -> QS [label ="v"];
+Q50CTS -> QL [label ="L"];
+QL -> QF [label ="l"];
+
+//II.Cas 20 cts début
+//1.10 cts
+QI -> Q20CTS [label ="2"];
+Q20CTS -> Q20CTS [label ="S,L"];
+Q20CTS -> Q30CTS [label ="1"];
+Q30CTS -> Q30CTS [label ="L"];
+Q30CTS -> Q40CTS [label ="1"];
+Q40CTS -> Q40CTS [label ="L"];
+Q40CTS -> Q50CTS [label ="1"]; //Ici il a mis 50 cts
+
+//2.20 cts
+Q20CTS -> Q40CTS [label ="2"];
+
+
+//II.Cas 10 cts début
+//1.10 cts
+QI -> Q10CTS [label ="1"];
+Q10CTS -> Q10CTS [label ="S,L"];
+Q10CTS -> Q20CTS [label ="1"];
+Q10CTS -> Q30CTS [label ="2"];
+
+//Depassements
+Q10CTS -> Q60CTS [label ="5"];
+Q60CTS -> Q50CTS [label ="d"];
+
+Q20CTS -> Q70CTS [label ="5"];
+Q70CTS -> Q50CTS [label ="v"]
+Q70CTS -> Q60CTS [label ="d"]
+
+
+Q30CTS -> Q80CTS [label ="5"];
+Q80CTS -> Q60CTS [label ="v"];
+Q80CTS -> Q70CTS [label ="d"];
+
+Q40CTS -> Q60CTS [label ="2"];
+Q40CTS -> Q90CTS [label ="5"];
+Q90CTS -> Q70CTS [label ="v"];
+Q90CTS -> Q80CTS [label ="d"];
+
+Q50CTS -> Q60CTS [label ="1"];
+Q50CTS -> Q70CTS [label ="2"];
+Q50CTS -> Q100CTS [label ="5"];
+Q100CTS -> Q80CTS [label ="v"];
+Q100CTS -> Q90CTS [label ="d"];
+Q100CTS -> Q50CTS [label ="c"];
+
+
+//Livraison de s
+Q40CTS -> QS10 [label ="S"];
+QS10 -> QS [label ="d"];
+
+Q30CTS -> QS [label ="S"];
+QS -> QF [label ="s"];
+}
