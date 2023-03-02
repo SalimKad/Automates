@@ -68,6 +68,13 @@ public class Main {
         String mot6 = "2Ss";
         boolean r8 = a3.appartient(mot6);
         System.out.println(mot6 + " appartient à A3 ? " + r8);
+        String mot7 = "5S5s";
+        boolean r9 = a3.appartient(mot7);
+        System.out.println(mot7 + " appartient à A3 ? " + r9);
+        String mot8 = "d51l";
+        boolean r10 = a3.appartient(mot8);
+        System.out.println(mot8 + " appartient à A3 ? " + r10);
+
 
 
     }
