@@ -34,16 +34,14 @@ public class Main {
         boolean r1 = a1.appartient(mot);
         System.out.println(mot + " appartient à A1 ? " + r1);
         boolean r2 = a1.appartient(mot2);
-        System.out.println(mot2 + " appartient à A1 ? " + r2);
+        //System.out.println(mot2 + " appartient à A1 ? " + r2);
         //On test Automate
         Automate a2 = new Automate("Exemple2.txt");
         //System.out.println("Automate 2 : " + a2);
         boolean r3 = a2.appartient(mot);
-        System.out.println(mot + " appartient à A2 ? " +r3);
+        //System.out.println(mot + " appartient à A2 ? " +r3);
         boolean r4 = a2.appartient(mot2);
-        System.out.println(mot2 + " appartient à A2 ? " + r4);
-
-
+        //System.out.println(mot2 + " appartient à A2 ? " + r4);
 
         //Exo 2 :
         /*
@@ -58,22 +56,26 @@ public class Main {
         System.out.println("Automate 3 : " + a3);
         String mot3 = "21Ss";
         boolean r5 = a3.appartient(mot3);
-        System.out.println(mot3 + " appartient à A3 ? " + r5);
         String mot4 = "5Svs";
         boolean r6 = a3.appartient(mot4);
-        System.out.println(mot4 + " appartient à A3 ? " + r6);
         String mot5 = "L22L1Ll";
         boolean r7 = a3.appartient(mot5);
-        System.out.println(mot5 + " appartient à A3 ? " + r7);
+        //System.out.println(mot5 + " appartient à A3 ? " + r7);
         String mot6 = "2Ss";
         boolean r8 = a3.appartient(mot6);
-        System.out.println(mot6 + " appartient à A3 ? " + r8);
+        //System.out.println(mot6 + " appartient à A3 ? " + r8);
         String mot7 = "5S5s";
         boolean r9 = a3.appartient(mot7);
-        System.out.println(mot7 + " appartient à A3 ? " + r9);
+        //System.out.println(mot7 + " appartient à A3 ? " + r9);
         String mot8 = "d51l";
         boolean r10 = a3.appartient(mot8);
-        System.out.println(mot8 + " appartient à A3 ? " + r10);
+        //System.out.println(mot8 + " appartient à A3 ? " + r10);
+        String mot9 = "d5t";
+        boolean r11 = a3.appartient(mot9);
+        //System.out.println(mot9 + " appartient à A2 ? " + r11);
+        String mot10 = "21S";
+        boolean r12 = a3.appartient(mot10);
+        //System.out.println(mot10 + " appartient à A2 ? " + r12);
 
 
 
