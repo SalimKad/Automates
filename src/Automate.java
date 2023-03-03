@@ -88,8 +88,6 @@ public class Automate {
 
     boolean appartient(String mot) {
         int cpt=0;
-        /*String data = "MonString";
-        char first = data.charAt(0);*/
 
         for(int i=0; i<mot.length(); i++){ //parcours les lettres du mot
             for(String a : alphabet) {
@@ -101,44 +99,45 @@ public class Automate {
         }
         //System.out.println(cpt);
         if (cpt != mot.length()) {
-            //System.out.println("1er false de appartient");
+            System.out.println("Symbole n’appartenant pas à l’alphabet de l’automate dans le mot " + mot);
             return false;
             //on retourne false si tous les caractères du mot ne sont pas dans l'alphabet
         }
 
         // vérifie qu'on peut construire le mot avec les transitions
         String etatActuel = etatInitial;
+        boolean trouve;
         for(int i=0; i<mot.length(); i++) {
-            boolean trouve = false;
+            trouve = false;
             for(Transition t : transitions){
-                // etat initial = etatActuel
-                // symbole = mot.charAt(i)
-                /*System.out.println(etatActuel);
-                System.out.println(mot.charAt(i));
-                System.out.println(t.getEtatInitial());
-                System.out.println(t.getSymbole());*/
 
                 //vérification de l'état actuel et l'état initial de la transition
                 if (t.getEtatInitial().equals(etatActuel)) {
                     //vérification du caractère du mot et du symbole de la transition
-                    if (t.getSymbole() == mot.charAt(i)) {
-                        //System.out.println("\n"+etatActuel);
+                    if (t.getSymbole() == mot.charAt(i)) { //si le symbole de la transition est égal au caractère du mot
                         etatActuel = t.getEtatFinal();
-                        //System.out.println(etatActuel+"\n");
                         trouve = true;
                     } else continue;
                 }
+
                 if(trouve) break;
                 // on sort de la boucle des transitions si une transition a été trouvée
             }
+            if(i==(mot.length()-1) && !trouve) {
+                System.out.println("Absence de transition à partir de l’état courant avec le symbole lu dans le mot " + mot);
+                return false;
+            }
         }
-
-        //System.out.println("Etat final = " + etatActuel);
+        //System.out.println("L'état actuel est " + etatActuel);
         for(String e : etatsFinaux) {
-            if(etatActuel.equals(e)) return true;
+            if(etatActuel.equals(e)){
+                System.out.println("Le mot " + mot + " est reconnu par l'automate");
+                return true;
+            }
             // on retourne vrai si l'état actuel de la fin du mot est un état final
         }
-        //System.out.println("Dernier false de appartient");
+
+        System.out.println("Fin du mot  avant d’atteindre un état final dans le mot " + mot);
         return false;
     }
 
