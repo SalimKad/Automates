@@ -1,0 +1,83 @@
+digraph G {
+    rankdir=LR
+    node [shape = circle]
+
+    #état initial
+    q0 [shape = doublecircle]
+    
+    #état final
+    q12 [shape = doublecircle]
+
+    #on commence par 50
+    q0 -> 50 [label="5"]
+
+    #on commence par 20
+    q0 -> 20 [label="2"]
+    20 -> 70 [label="5"]
+    20 -> 40 [label="2"]
+    20 -> 30 [label="1"]
+
+    #on commence par 10 cts
+    q0 -> q0 [label="S,L"]
+    q0 -> 10 [label="1"]
+
+    #on a 10 cts et on rajoute 10, 20 ou 50 cts
+    10 -> 60 [label="5"]
+    10 -> 30 [label="2"]
+    10 -> 20 [label="1"]
+
+    60 -> 60 [label="S,L"]
+    #on est à 60 cts donc on rend 10
+    60 -> 50 [label="d"]
+    #on est à 50 et commande long
+    50 -> q7 [label="L"]
+    q7 -> q12 [label="l"]
+    #on est à 50 et commande short avec rendu monnaie
+    50 -> q6 [label="S"]
+    q6 -> q9 [label="d"]
+    q6 -> q10 [label="v"]
+    q9 -> q10 [label="d"]
+    q10 -> q12 [label="s"]
+
+    #on est à 30 cts
+    30 -> 30 [label="L"]
+    #commande short
+    30 -> q13 [label="S"]
+    q13 -> q12 [label="s"]
+    #on est à 80, rendu monnaie
+    30 -> 80 [label="5"]
+    80 -> 70 [label="d"]
+    80 -> 60 [label="v"]
+    70 -> 50 [label="v"]
+
+
+    30 -> 50 [label="2"]
+    #quand on est à 50 cts et que le client rajoute de l'argent on lui rend directement sa pièce
+    50 -> q20 [label="1"]
+    q20 -> 50 [label="d"]
+    50 -> q21 [label="2"]
+    q21 -> 50 [label="v"]
+    50 -> q22 [label="5"]
+    q22 -> 50 [label="c"]
+
+    #on est à 30 cts
+    30 -> 40 [label="1"]
+    #on est à 40 cts, commande short et rend monnaie
+    40 -> 30 [label="d"]
+    #commande long impossible
+    40 -> 40 [label="L"]
+    #rendre la pièce si 20 ou 50
+    40 -> 90 [label="5"]
+    90 -> 80 [label="d"]
+    90 -> 70 [label="v"]
+    #ajout 10, on est à 50
+    40 -> 50 [label="1"]
+
+    #on est à 20 cts
+    20 -> 20 [label="S,L"]
+    # on est a 70, rendu monnaie et commande
+    70 -> 60 [label="d"]
+    #on est à 50 et commande
+    40 -> 60 [label="2"]
+
+}
