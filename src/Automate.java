@@ -9,6 +9,7 @@ public class Automate {
     private ArrayList<String> etatsFinaux;
     private ArrayList<String> etats;
     private ArrayList<Transition> transitions;
+    private ArrayList<String> pile = new ArrayList<String>();
 
     public Automate(String etatInitial, ArrayList<String> etats, ArrayList<String> alphabet, ArrayList<String> etatsFinaux, ArrayList<Transition> transitions) {
         this.etatInitial = etatInitial;
@@ -80,7 +81,7 @@ public class Automate {
                 if (parts.length != 3) {
                     throw new Exception("Invalid transition format");
                 }
-                transitions.add(new Transition(parts[0], parts[2], parts[1].charAt(0)));
+                //transitions.add(new Transition(parts[0], parts[2], parts[1].charAt(0)));
             }
         }
         this.etatInitial = etatInitial;
