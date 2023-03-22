@@ -1,16 +1,26 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+/*
+
+        Automate a1 = new Automate("Exemple.txt");
+        System.out.println("Automate 3 : " + a1);
+
         //On test appartient
         ArrayList<String> alphabet = new ArrayList<>();
         String etatInitial;
         ArrayList<String> etatsFinaux = new ArrayList<>();
         ArrayList<String> etats = new ArrayList<>();
         ArrayList<Transition> transitions = new ArrayList<>();
+        ArrayList<String> alphabetPile = new ArrayList<>();
 
         alphabet.add("a");
         alphabet.add("b");
+
+        alphabetPile.add("A");
+        alphabetPile.add("B");
 
         etats.add("S1");
         etats.add("S2");
@@ -18,66 +28,26 @@ public class Main {
         etatInitial = "S1";
         etatsFinaux.add("S3");
 
-        Transition t1 = new Transition("S1","S1", 'a');
-        Transition t2 = new Transition("S1","S2", 'b');
-        Transition t3 = new Transition("S2","S2", 'b');
-        Transition t4 = new Transition("S2","S3", 'a');
+        char[] add_pile1 = {'A','A'};
+        char[] add_pile2 = {'A','B'};
+        char[] add_pile3 = {'B'};
+        char[] add_pile4 = {'B','A'};
+
+        Transition t1 = new Transition("S1","S1", 'a', 'Z', add_pile1);
+        Transition t2 = new Transition("S1","S2", 'b','A',add_pile2);
+        Transition t3 = new Transition("S2","S2", 'b','A', add_pile3);
+        Transition t4 = new Transition("S2","S3", 'a','B', add_pile4);
         transitions.add(t1);
         transitions.add(t2);
         transitions.add(t3);
         transitions.add(t4);
-
-        Automate a1 = new Automate(etatInitial, etats, alphabet, etatsFinaux, transitions);
-        //System.out.println("Automate 1 : " + a1);
-        String mot = "abba";
-        String mot2 = "aab";
-        boolean r1 = a1.appartient(mot);
-        System.out.println(mot + " appartient à A1 ? " + r1);
-        boolean r2 = a1.appartient(mot2);
-        //System.out.println(mot2 + " appartient à A1 ? " + r2);
-        //On test Automate
-        Automate a2 = new Automate("Exemple2.txt");
-        //System.out.println("Automate 2 : " + a2);
-        boolean r3 = a2.appartient(mot);
-        //System.out.println(mot + " appartient à A2 ? " +r3);
-        boolean r4 = a2.appartient(mot2);
-        //System.out.println(mot2 + " appartient à A2 ? " + r4);
-
-        //Exo 2 :
-        /*
-        String alph[] = {"1","2","5","S","L","s","l","d","v","c"};
-        for(String a : alph){
-            alphabet.add(a);
-        }
-        System.out.println(alphabet);
-        */
-        System.out.println("Exo 2 :\n");
-        Automate a3 = new Automate("Exo2.txt");
-        System.out.println("Automate 3 : " + a3);
-        String mot3 = "21Ss";
-        boolean r5 = a3.appartient(mot3);
-        String mot4 = "5Svs";
-        boolean r6 = a3.appartient(mot4);
-        String mot5 = "L22L1Ll";
-        boolean r7 = a3.appartient(mot5);
-        //System.out.println(mot5 + " appartient à A3 ? " + r7);
-        String mot6 = "2Ss";
-        boolean r8 = a3.appartient(mot6);
-        //System.out.println(mot6 + " appartient à A3 ? " + r8);
-        String mot7 = "5S5s";
-        boolean r9 = a3.appartient(mot7);
-        //System.out.println(mot7 + " appartient à A3 ? " + r9);
-        String mot8 = "d51l";
-        boolean r10 = a3.appartient(mot8);
-        //System.out.println(mot8 + " appartient à A3 ? " + r10);
-        String mot9 = "d5t";
-        boolean r11 = a3.appartient(mot9);
-        //System.out.println(mot9 + " appartient à A2 ? " + r11);
-        String mot10 = "21S";
-        boolean r12 = a3.appartient(mot10);
-        //System.out.println(mot10 + " appartient à A2 ? " + r12);
-
-
+*/
+        Automate a2 = new Automate("ExoV2.txt");
+        System.out.println("Automate calculatrice : " + a2);
+        String mot = "8+4";
+        System.out.println("Le mot " + mot + " est accepté par l'automate ? " + a2.appartient(mot));
+        String mot2 = "((150-24)*72+4)/5";
+        System.out.println("Le mot " + mot2 + " est accepté par l'automate ? " + a2.appartient(mot2));
 
     }
 }

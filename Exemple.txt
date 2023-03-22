@@ -1,6 +1,9 @@
-# alphabet
+# alphabet automate
 a
 b
+# alphabet pile
+A
+B
 # etats
 S1
 S2
@@ -10,7 +13,5 @@ S1
 # etats finaux
 S3
 # transitions
-S1 a S1
-S1 b S2
-S2 b S2
-S2 a S3
+S1 a Z S2 A
+S2 b A S3 AB

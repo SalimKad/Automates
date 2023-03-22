@@ -1,13 +1,17 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Transition {
     private String etatFinal, etatInitial;
-    private char symbole, sommet, nv_symboles;
+    private char symbole, symbolesommet;
+    private char[] symbolepile;
 
-    public Transition(String etatInitial, String etatFinal, char symbole, char sommet, char nv_symboles) {
-        this.etatFinal = etatFinal;
+    public Transition(String etatInitial, String etatFinal, char symbole, char symbolesommet, char[] symbolepile) {
         this.etatInitial = etatInitial;
         this.symbole = symbole;
-        this.sommet = sommet;
-        this.nv_symboles = nv_symboles;
+        this.symbolesommet = symbolesommet;
+        this.etatFinal = etatFinal;
+        this.symbolepile = symbolepile;
     }
 
     public String getEtatFinal() {
@@ -34,20 +38,20 @@ public class Transition {
         this.symbole = symbole;
     }
 
-    public void setSommet(char sommet) {
-        this.sommet = sommet;
+    public void setSymbolesommet(char symbolesommet) {
+        this.symbolesommet = symbolesommet;
     }
 
-    public char getSommet() {
-        return sommet;
+    public char getSymbolesommet() {
+        return symbolesommet;
     }
 
-    public void setNv_symboles(char nv_symboles) {
-        this.nv_symboles = nv_symboles;
+    public void setSymbolepile(char[] symbolepile) {
+        this.symbolepile = symbolepile;
     }
 
-    public char getNv_symboles() {
-        return nv_symboles;
+    public char[] getSymbolepile() {
+        return symbolepile;
     }
 
     @Override
@@ -56,6 +60,8 @@ public class Transition {
                 "etatFinal='" + etatFinal + '\'' +
                 ", symbole=" + symbole +
                 ", etatInitial='" + etatInitial + '\'' +
+                ", symbolesommet=" + symbolesommet +
+                ", symbolepile=" + Arrays.toString(symbolepile) +
                 '}';
     }
 }
