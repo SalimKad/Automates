@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.regex.*;
 
 public class Automate {
@@ -124,7 +125,7 @@ public class Automate {
         }
         //System.out.println(cpt);
         if (cpt != mot.length()) {
-            System.out.println("Symbole n’appartenant pas à l’alphabet de l’automate dans le mot " + mot);
+            System.out.println(mot + "n’est pas un nombre valide ");
             return false;
             //on retourne false si tous les caractères du mot ne sont pas dans l'alphabet
         }
@@ -133,7 +134,7 @@ public class Automate {
         String etatActuel = etatInitial;
         boolean trouve;
         for(int i=0; i<mot.length(); i++) {
-            System.out.println("Pile : " + pile);
+            //System.out.println("Pile : " + pile);
             trouve = false;
             for(Transition t : transitions){
                 //System.out.println("Transition : " + t);
@@ -142,7 +143,7 @@ public class Automate {
                     //vérification du caractère du mot et du symbole de la transition
                     //System.out.println("t.getSymbole() " + t.getSymbole() + " mot.charAt(i) " + mot.charAt(i));
                     if (t.getSymbole() == mot.charAt(i)) { //si le symbole de la transition est égal au caractère du mot
-                        System.out.println("Transition trouvée : " + t);
+                        //System.out.println("Transition trouvée : " + t);
                         int n = pile.size();
                         if (t.getSymbolesommet() == pile.get(n-1).charAt(0)) {
                             pile.remove(n - 1);
@@ -154,9 +155,9 @@ public class Automate {
                                 //System.out.println("On a ajouté " + s + " à la Pile : " + pile);
                             }
                             etatActuel = t.getEtatFinal();
-                            System.out.println("L'état actuel est " + etatActuel);
+                            //System.out.println("L'état actuel est " + etatActuel);
                             trouve = true;
-                            System.out.println("Trouve = "+trouve);
+                            //System.out.println("Trouve = "+trouve);
                             break;
                         }  //si le symbole du sommet de la pile est différent du symbole du sommet de la transition
                     } else continue; //si le symbole de la transition est différent du caractère du mot
@@ -178,23 +179,166 @@ public class Automate {
         for(String e : etatsFinaux) {
             if(etatActuel.equals(e)){
                 if(pile.size() == 1 && pile.get(0).equals("Z")) {
-                    System.out.println("Le mot " + mot + " est reconnu par l'automate et la pile est vide");
+                    System.out.println("L’expression " + mot + " est valide");
+                    //System.out.println("Le mot " + mot + " est reconnu par l'automate et la pile est vide");
                     return true;
                 }
                 else {
-                    System.out.println("Le mot " + mot + " est reconnu par l'automate mais la pile n'est pas vide");
-                    System.out.println("Pile : " + pile);
+                    /*System.out.println("Le mot " + mot + " est reconnu par l'automate mais la pile n'est pas vide");
+                    System.out.println("Pile : " + pile);*/
+                    System.out.println("Il manque une parenthèse fermante dans l’expression "+ mot);
                     return false;
                 }
             }
             // on retourne vrai si l'état actuel de la fin du mot est un état final
         }
 
-        System.out.println("Fin du mot  avant d’atteindre un état final dans le mot " + mot);
+        System.out.println("On ne peut pas finir l'expression par un signe dans " + mot);
         return false;
     }
 
-    public ArrayList<String> getAlphabet() {
+    /*public static double evalueExpression(String expression) {
+        // Créer une pile pour stocker les nombres et les opérateurs
+        Stack<Double> stack = new Stack<>();
+
+        // Variables pour stocker les nombres et les opérateurs
+        double num = 0;
+        char operateur = '+';
+
+        // Analyser l'expression caractère par caractère
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+
+            // Si c'est un chiffre, l'ajouter au nombre en cours de lecture
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
+            }
+
+            // Si c'est un opérateur ou le dernier caractère de l'expression
+            if (!Character.isDigit(c) || i == expression.length() - 1) {
+                // Appliquer l'opérateur précédent
+                if (operateur == '+') {
+                    stack.push(num);
+                } else if (operateur == '-') {
+                    stack.push(-num);
+                } else if (operateur == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (operateur == '/') {
+                    stack.push(stack.pop() / num);
+                }
+
+                // Mise à jour de l'opérateur en cours de traitement
+                operateur = c;
+
+                // Réinitialiser le nombre en cours de lecture
+                num = 0;
+
+            }
+        }
+
+        // Additionner les nombres dans la pile
+        double result = 0;
+        while (!stack.isEmpty()) {
+            result += stack.pop();
+        }
+
+        return result;
+    }*/
+    public static double evalueExpression(String expression) {
+    // Créer une pile pour stocker les nombres et les opérateurs
+        Stack<Double> stack = new Stack<>();
+    // Créer une pile pour stocker les parenthèses ouvrantes
+        Stack<Character> parentheses = new Stack<>();
+    // Variables pour stocker les nombres et les opérateurs
+    double num = 0;
+    char operateur = '+';
+
+    // Analyser l'expression caractère par caractère
+    for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
+
+            // Si c'est un chiffre, l'ajouter au nombre en cours de lecture
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
+            }
+
+            // Si c'est une parenthèse ouvrante
+            else if (c == '(') {
+                // Empiler l'opérateur et le nombre en cours de lecture
+                stack.push((double) operateur);
+                stack.push(num);
+                // Empiler la parenthèse ouvrante
+                parentheses.push(c);
+                // Réinitialiser le nombre en cours de lecture et l'opérateur en cours
+                num = 0;
+                operateur = '+';
+            }
+
+            // Si c'est une parenthèse fermante ou le dernier caractère de l'expression
+            if (c == ')' || i == expression.length() - 1) {
+                // Appliquer l'opérateur précédent
+                if (operateur == '+') {
+                    stack.push(num);
+                } else if (operateur == '-') {
+                    stack.push(-num);
+                } else if (operateur == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (operateur == '/') {
+                    stack.push(stack.pop() / num);
+                }
+
+                // Réinitialiser le nombre en cours de lecture et l'opérateur en cours
+                num = 0;
+                operateur = '+';
+
+                // Tant qu'il y a des parenthèses ouvrantes dans la pile
+                while (!parentheses.isEmpty()) {
+                    // Appliquer l'opérateur précédent
+                    if (stack.peek() == '+') {
+                        stack.push(stack.pop() + stack.pop());
+                    } else if (stack.peek() == '-') {
+                        stack.push(-stack.pop() + stack.pop());
+                    } else if (stack.peek() == '*') {
+                        stack.push(stack.pop() * stack.pop());
+                    } else if (stack.peek() == '/') {
+                        stack.push(1 / stack.pop() * stack.pop());
+                    }
+                    // Dépiler la parenthèse ouvrante
+                    parentheses.pop();
+                }
+            }
+
+            // Si c'est un opérateur
+            if (!Character.isDigit(c) && c != '(' && c != ')') {
+                // Appliquer l'opérateur précédent
+                if (operateur == '+') {
+                    stack.push(num);
+                } else if (operateur == '-') {
+                    stack.push(-num);
+                } else if (operateur == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (operateur == '/') {
+                    stack.push(stack.pop() / num);
+                }
+                // Mise à jour de l'opérateur en cours de traitement
+                operateur = c;
+                // Réinitialiser le nombre en cours de lecture
+                num = 0;
+            }
+
+        }
+
+        // Additionner les nombres dans la pile
+        double result = 0;
+        while (!stack.isEmpty()) {
+            result += stack.pop();
+        }
+
+        return result;
+    }
+
+
+            public ArrayList<String> getAlphabet() {
         return alphabet;
     }
 

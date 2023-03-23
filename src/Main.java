@@ -45,9 +45,32 @@ public class Main {
         Automate a2 = new Automate("ExoV2.txt");
         System.out.println("Automate calculatrice : " + a2);
         String mot = "8+4";
-        System.out.println("Le mot " + mot + " est accepté par l'automate ? " + a2.appartient(mot));
+        a2.appartient(mot);
+        //System.out.println("Le mot " + mot + " est accepté par l'automate ? " + a2.appartient(mot));
         String mot2 = "((150-24)*72+4)/5";
-        System.out.println("Le mot " + mot2 + " est accepté par l'automate ? " + a2.appartient(mot2));
+        a2.appartient(mot2);
+        //System.out.println("Le mot " + mot2 + " est accepté par l'automate ? " + a2.appartient(mot2));
+        String mot3 = "((150-24)*72+4)/5+";
+        a2.appartient(mot3);
+        //System.out.println("Le mot " + mot3 + " est accepté par l'automate ? " + a2.appartient(mot3));
+        String mot4 = "((150-24)*72+4/5";
+        a2.appartient(mot4);
+        //System.out.println("Le mot " + mot4 + " est accepté par l'automate ? " + a2.appartient(mot4));
+
+        System.out.println(mot +" = " + a2.evalueExpression(mot));
+        System.out.println(mot2 +" = " + a2.evalueExpression(mot2));
+        //System.out.println(mot3 +" = " + a2.evalueExpression(mot3));
+        //System.out.println(mot4 +" = " + a2.evalueExpression(mot4));
+
+        String mot5 = "12*2+3";
+        System.out.println( mot5 + " = " + a2.evalueExpression(mot5));
+        String mot6 = "12*(2+3)";
+        System.out.println( mot6 + " = " + a2.evalueExpression(mot6));
+        String mot7 = "4+2*4";
+        System.out.println( mot7 + " = " + a2.evalueExpression(mot7));
+        String mot8 = "(4+2)*4";
+        System.out.println( mot8 + " = " + a2.evalueExpression(mot8));
+
 
     }
 }
