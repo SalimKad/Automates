@@ -179,7 +179,7 @@ public class Automate {
         for(String e : etatsFinaux) {
             if(etatActuel.equals(e)){
                 if(pile.size() == 1 && pile.get(0).equals("Z")) {
-                    System.out.println("L’expression " + mot + " est valide");
+                    System.out.println("L’expression " + mot + " est valide et son résultat est " + evalueExpression(mot));
                     //System.out.println("Le mot " + mot + " est reconnu par l'automate et la pile est vide");
                     return true;
                 }
@@ -197,7 +197,13 @@ public class Automate {
         return false;
     }
 
-    /*public static double evalueExpression(String expression) {
+    public double evalueExpression(String expression) {
+        //On supprime les parenthèses
+        expression = expression.replaceAll("\\s+", "");
+        expression = expression.replaceAll("\\(", "");
+        expression = expression.replaceAll("\\)", "");
+        //System.out.println("Expression : " + expression);
+
         // Créer une pile pour stocker les nombres et les opérateurs
         Stack<Double> stack = new Stack<>();
 
@@ -243,8 +249,8 @@ public class Automate {
         }
 
         return result;
-    }*/
-    public static double evalueExpression(String expression) {
+    }
+    /*public static double evalueExpression(String expression) {
     // Créer une pile pour stocker les nombres et les opérateurs
         Stack<Double> stack = new Stack<>();
     // Créer une pile pour stocker les parenthèses ouvrantes
@@ -311,14 +317,14 @@ public class Automate {
             // Si c'est un opérateur
             if (!Character.isDigit(c) && c != '(' && c != ')') {
                 // Appliquer l'opérateur précédent
-                if (operateur == '+') {
-                    stack.push(num);
-                } else if (operateur == '-') {
-                    stack.push(-num);
-                } else if (operateur == '*') {
+                if (operateur == '*') {
                     stack.push(stack.pop() * num);
                 } else if (operateur == '/') {
                     stack.push(stack.pop() / num);
+                } else if (operateur == '+') {
+                    stack.push(num);
+                } else if (operateur == '-') {
+                    stack.push(-num);
                 }
                 // Mise à jour de l'opérateur en cours de traitement
                 operateur = c;
@@ -326,7 +332,8 @@ public class Automate {
                 num = 0;
             }
 
-        }
+
+    }
 
         // Additionner les nombres dans la pile
         double result = 0;
@@ -335,7 +342,7 @@ public class Automate {
         }
 
         return result;
-    }
+    }*/
 
 
             public ArrayList<String> getAlphabet() {
