@@ -56,20 +56,21 @@ public class Main {
         String mot4 = "((150-24)*72+4/5";
         a2.appartient(mot4);
         //System.out.println("Le mot " + mot4 + " est accepté par l'automate ? " + a2.appartient(mot4));
-
-        System.out.println(mot +" = " + a2.evalueExpression(mot));
-        System.out.println(mot2 +" = " + a2.evalueExpression(mot2));
-        //System.out.println(mot3 +" = " + a2.evalueExpression(mot3));
-        //System.out.println(mot4 +" = " + a2.evalueExpression(mot4));
-
         String mot5 = "12*2+3";
-        System.out.println( mot5 + " = " + a2.evalueExpression(mot5));
+        a2.appartient(mot5);
+
+        /*System.out.println(mot +" = " + a2.evalueExpression(mot));
+        System.out.println(mot2 +" = " + a2.evalueExpression(mot2));
+        System.out.println(mot3 +" = " + a2.evalueExpression(mot3));
+        System.out.println(mot4 +" = " + a2.evalueExpression(mot4));*/
+
+        /*
         String mot6 = "12*(2+3)";
         System.out.println( mot6 + " = " + a2.evalueExpression(mot6));
         String mot7 = "4+2*4";
         System.out.println( mot7 + " = " + a2.evalueExpression(mot7));
         String mot8 = "(4+2)*4";
-        System.out.println( mot8 + " = " + a2.evalueExpression(mot8));
+        System.out.println( mot8 + " = " + a2.evalueExpression(mot8));*/
 
 
     }
