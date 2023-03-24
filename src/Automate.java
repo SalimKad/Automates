@@ -41,7 +41,6 @@ public class Automate {
 
 
         //Lecture du fichier
-        //System.out.println("la ligne est " + line);
         if (line.startsWith("# alphabet automate")) {
             while (obj.hasNextLine()) {
                 line = obj.nextLine();
@@ -52,13 +51,11 @@ public class Automate {
                 alphabet.add(line.trim()); //ajouter les lettres de l'alphabet dans la liste alphabet
                 //la fonction trim() permet de supprimer les espaces avant et après la lettre
             }
-            //System.out.println("la ligne est " + line);
         }
         if (line.startsWith("# alphabet pile")) {
             while (obj.hasNextLine()) {
                 line = obj.nextLine();
                 if (line.startsWith("#")) {
-                    //System.out.println("On s'arrête à la ligne" + line);
                     break;
                 }
                 alphabetPile.add(line.trim()); //ajouter les lettres de l'alphabet dans la liste alphabet
@@ -66,11 +63,9 @@ public class Automate {
             }
         }
         if (line.startsWith("# etats")) {
-            //System.out.println("la ligne est " + line);
             while (obj.hasNextLine()) {
                 line = obj.nextLine();
                 if (line.startsWith("#")) {
-                    //System.out.println("Dans état, on s'arrête à la ligne" + line);
                     break;
                 }
                 etats.add(line.trim()); //ajouter les états dans la liste etats
@@ -78,14 +73,12 @@ public class Automate {
         }
         if (line.startsWith("# etat initial")) {
             etatInitial = obj.nextLine().trim();
-            //System.out.println("Dans état initial, on s'arrête à la ligne" + line);
             line = obj.nextLine();
         }
         if (line.startsWith("# etats finaux")) {
             while (obj.hasNextLine()) {
                 line = obj.nextLine();
                 if (line.startsWith("#")) {
-                    //System.out.println("Dans état final, on s'arrête à la ligne" + line);
                     break;
                 }
                 etatsFinaux.add(line.trim());
@@ -101,7 +94,6 @@ public class Automate {
                 if (parts.length < 3) {
                     throw new Exception("Invalid transition format");
                 }
-                //System.out.println(Arrays.toString(parts));
                 char[] symbolepile = parts[4].toCharArray();
                 transitions.add(new Transition(parts[0], parts[3], parts[1].charAt(0), parts[2].charAt(0), symbolepile));
             }
@@ -133,17 +125,16 @@ public class Automate {
         // vérifie qu'on peut construire le mot avec les transitions
         String etatActuel = etatInitial;
         boolean trouve;
+
         for(int i=0; i<mot.length(); i++) {
-            //System.out.println("Pile : " + pile);
             trouve = false;
             for(Transition t : transitions){
-                //System.out.println("Transition : " + t);
+
                 //vérification de l'état actuel et l'état initial de la transition
                 if (t.getEtatInitial().equals(etatActuel)) {
                     //vérification du caractère du mot et du symbole de la transition
-                    //System.out.println("t.getSymbole() " + t.getSymbole() + " mot.charAt(i) " + mot.charAt(i));
+
                     if (t.getSymbole() == mot.charAt(i)) { //si le symbole de la transition est égal au caractère du mot
-                        //System.out.println("Transition trouvée : " + t);
                         int n = pile.size();
                         if (t.getSymbolesommet() == pile.get(n-1).charAt(0)) {
                             pile.remove(n - 1);
@@ -152,40 +143,28 @@ public class Automate {
                                 if(s != 'E'){
                                     pile.add("" + s);
                                 }
-                                //System.out.println("On a ajouté " + s + " à la Pile : " + pile);
                             }
                             etatActuel = t.getEtatFinal();
-                            //System.out.println("L'état actuel est " + etatActuel);
                             trouve = true;
-                            //System.out.println("Trouve = "+trouve);
                             break;
                         }  //si le symbole du sommet de la pile est différent du symbole du sommet de la transition
                     } else continue; //si le symbole de la transition est différent du caractère du mot
                 } else continue; //si l'état actuel est différent de l'état initial de la transition
             }
 
-                /*if(trouve) break;
-                else {
-                    System.out.println("Absence de transition à partir de l’état courant avec le symbole lu dans le mot " + mot);
-                    return false;
-                }*/
-
             if(i==(mot.length()-1) && !trouve) {
                 System.out.println("Absence de transition à partir de l’état courant avec le symbole lu dans le mot " + mot);
                 return false;
             }
         }
-        //System.out.println("L'état actuel est " + etatActuel);
+
         for(String e : etatsFinaux) {
             if(etatActuel.equals(e)){
                 if(pile.size() == 1 && pile.get(0).equals("Z")) {
                     System.out.println("L’expression " + mot + " est valide et son résultat est " + evalueExpression(mot));
-                    //System.out.println("Le mot " + mot + " est reconnu par l'automate et la pile est vide");
                     return true;
                 }
                 else {
-                    /*System.out.println("Le mot " + mot + " est reconnu par l'automate mais la pile n'est pas vide");
-                    System.out.println("Pile : " + pile);*/
                     System.out.println("Il manque une parenthèse fermante dans l’expression "+ mot);
                     return false;
                 }
@@ -202,7 +181,6 @@ public class Automate {
         expression = expression.replaceAll("\\s+", "");
         expression = expression.replaceAll("\\(", "");
         expression = expression.replaceAll("\\)", "");
-        //System.out.println("Expression : " + expression);
 
         // Créer une pile pour stocker les nombres et les opérateurs
         Stack<Double> stack = new Stack<>();
@@ -250,6 +228,9 @@ public class Automate {
 
         return result;
     }
+
+    //Fonction qui evalue une expression mathématique avec parenthèses, elle ne fonctionne pas
+
     /*public static double evalueExpression(String expression) {
     // Créer une pile pour stocker les nombres et les opérateurs
         Stack<Double> stack = new Stack<>();
